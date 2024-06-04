@@ -5,7 +5,7 @@ import pandas as pd
 
 # Big title of the dashboard
 
-up_load_or_not = st.checkbox('Upload RFQ Data Manually?', value=False)
+up_load_or_not = st.checkbox('Upload RFQ Data Manually?', value=True)
 if up_load_or_not:
     file = st.file_uploader("Upload RFQ Data (.csv)")
     data = pd.read_csv(file)
