@@ -137,3 +137,25 @@ aggregated_data['order_final_pnl_ma'] = aggregated_data['order_final_pnl'].rolli
 
 st.header('order_final_pnl MA Line')
 st.line_chart(aggregated_data['order_final_pnl_ma'])
+
+
+
+
+# token visualization
+
+
+st.header('Token Dynamic Fees/ Volume')
+st.bar_chart(token_aggregated_data['dynamic_fees_in_usdt']/token_aggregated_data['volume'])
+
+
+st.header("Token Order Final PnL")
+st.bar_chart(token_aggregated_data['order_final_pnl'])
+
+st.header("Token Buy Ratio")
+st.bar_chart(token_aggregated_data['buy_flag']/token_aggregated_data['orderHash'])
+
+st.header("Token Volume")
+st.bar_chart(token_aggregated_data['volume'])
+
+st.header("Token Daily PnL to Volume in %")
+st.bar_chart(100*token_aggregated_data['order_final_pnl']/token_aggregated_data['volume']) 
