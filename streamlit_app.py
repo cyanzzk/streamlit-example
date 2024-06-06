@@ -5,7 +5,40 @@ import pandas as pd
 
 # Big title of the dashboard
 
-up_load_or_not = st.checkbox('Upload RFQ Data Manually?', value=True)
+
+#......................Binance Liquidity Status...........................
+
+
+import requests
+
+# Make a GET request to the API endpoint
+response = requests.get('https://fapi.binance.com/fapi/v1/ticker/24hr')
+
+# Parse the JSON response to a Python list of dictionaries
+data = response.json()
+
+# Create a list to hold the data
+data_list = []
+
+# Iterate over the list of dictionaries
+for item in data:
+    # Extract the 'symbol' and 'volume' fields
+    symbol = item['symbol']
+    volume = item['volume']
+    volume_per_sec = float(item['volume']) / 86400
+
+    # Append the extracted data to the list
+    data_list.append([symbol, volume, volume_per_sec])
+
+# Convert the list to a DataFrame
+df = pd.DataFrame(data_list, columns=['symbol', 'volume', 'volume_per_sec'])
+
+df
+
+
+#...........................File Upload....................
+
+up_load_or_not = st.checkbox('Upload RFQ Data Manually?', value=False)
 if up_load_or_not:
     file = st.file_uploader("Upload RFQ Data (.csv)")
     data = pd.read_csv(file)
@@ -13,6 +46,8 @@ else:
     data = pd.read_csv('file.csv')
 
 st.title('RFQ Data Visualization')
+
+
 
 
 
@@ -31,7 +66,6 @@ filter_date = st.text_input('Enter the date to filter data after', '2024-01-01')
 # Filter data after a certain date
 data = data[data['date'] >= pd.Timestamp(filter_date)]
 data
-
 
 
 
@@ -140,7 +174,6 @@ st.line_chart(aggregated_data['order_final_pnl_ma'])
 
 
 
-
 # token visualization
 
 
@@ -159,3 +192,6 @@ st.bar_chart(token_aggregated_data['volume'])
 
 st.header("Token Daily PnL to Volume in %")
 st.bar_chart(100*token_aggregated_data['order_final_pnl']/token_aggregated_data['volume']) 
+
+
+
