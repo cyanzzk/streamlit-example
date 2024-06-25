@@ -9,31 +9,31 @@ import pandas as pd
 #......................Binance Liquidity Status...........................
 
 
-# import requests
+import requests
 
-# # Make a GET request to the API endpoint
-# response = requests.get('https://fapi.binance.com/fapi/v1/ticker/24hr')
+# Make a GET request to the API endpoint
+response = requests.get('https://fapi.binance.com/fapi/v1/ticker/24hr')
 
-# # Parse the JSON response to a Python list of dictionaries
-# data = response.json()
+# Parse the JSON response to a Python list of dictionaries
+data = response.json()
 
-# # Create a list to hold the data
-# data_list = []
+# Create a list to hold the data
+data_list = []
 
-# # Iterate over the list of dictionaries
-# for item in data:
-#     # Extract the 'symbol' and 'volume' fields
-#     symbol = item['symbol']
-#     volume = item['volume']
-#     volume_per_sec = float(item['volume']) / 86400
+# Iterate over the list of dictionaries
+for item in data:
+    # Extract the 'symbol' and 'volume' fields
+    symbol = item['symbol']
+    volume = item['volume']
+    volume_per_sec = float(item['volume']) / 86400
 
-#     # Append the extracted data to the list
-#     data_list.append([symbol, volume, volume_per_sec])
+    # Append the extracted data to the list
+    data_list.append([symbol, volume, volume_per_sec])
 
-# # Convert the list to a DataFrame
-# df = pd.DataFrame(data_list, columns=['symbol', 'volume', 'volume_per_sec'])
+# Convert the list to a DataFrame
+df = pd.DataFrame(data_list, columns=['symbol', 'volume', 'volume_per_sec'])
 
-# df
+df
 
 
 #...........................File Upload....................
