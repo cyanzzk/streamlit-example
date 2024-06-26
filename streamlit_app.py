@@ -17,6 +17,7 @@ response = requests.get('https://fapi.binance.com/fapi/v1/ticker/24hr')
 # Parse the JSON response to a Python list of dictionaries
 data = response.json()
 
+print(data)
 # Create a list to hold the data
 data_list = []
 
