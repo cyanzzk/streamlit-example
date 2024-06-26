@@ -17,23 +17,26 @@ response = requests.get('https://fapi.binance.com/fapi/v1/ticker/24hr')
 # Parse the JSON response to a Python list of dictionaries
 data = response.json()
 
-# print(data)
-# Create a list to hold the data
-data_list = []
 
-# Iterate over the list of dictionaries
-for item in data:
-    # Extract the 'symbol' and 'volume' fields
-    symbol = item['symbol']
-    volume = item['volume']
-    volume_per_sec = float(item['volume']) / 86400
 
-    # Append the extracted data to the list
-    data_list.append([symbol, volume, volume_per_sec])
+# # print(data)
+# # Create a list to hold the data
+# data_list = []
 
-# Convert the list to a DataFrame
-df = pd.DataFrame(data_list, columns=['symbol', 'volume', 'volume_per_sec'])
+# # Iterate over the list of dictionaries
+# for item in data:
+#     # Extract the 'symbol' and 'volume' fields
+#     symbol = item['symbol']
+#     volume = item['volume']
+#     volume_per_sec = float(item['volume']) / 86400
 
+#     # Append the extracted data to the list
+#     data_list.append([symbol, volume, volume_per_sec])
+
+# # Convert the list to a DataFrame
+# df = pd.DataFrame(data_list, columns=['symbol', 'volume', 'volume_per_sec'])
+
+df = pd.DataFrame(data)
 df
 
 
